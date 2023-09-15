@@ -11,10 +11,10 @@ lerna-debug.log*
 
 # Coverage directory generated when running tests with coverage
 coverage
-env.*
+
 # Dependencies
 node_modules/
-env.example
+
 # Yarn 3 files
 .pnp.*
 .yarn/*
@@ -26,6 +26,7 @@ env.example
 
 # Node version directives
 .nvmrc
+
 # dotenv environment variables file
 .env
 .env.test
@@ -48,4 +49,3 @@ site
 
 # vscode database functionality support files
 *.session.sql
-

@@ -1,25 +1,9 @@
 app:
   title: Zenith
-  listen: 
-    port: ${PORT}
-    host: ${HOST}
-  baseUrl: ${BASE_URL}:${PORT}
+  baseUrl: http://localhost:3000
 
 organization:
   name: Keycode
-
-auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
-  environment: development
-  providers:
-    google:
-      development:
-        clientId: ${AUTH_GOOGLE_CLIENT_ID}
-        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
-    github:
-      development:
-        clientId: ${AUTH_GITHUB_CLIENT_ID}
-        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -28,9 +12,9 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: ${BASE_URL}:${BACKEND_PORT}
+  baseUrl: http://localhost:7007
   listen:
-    port: ${BACKEND_PORT}
+    port: 7007
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
@@ -38,7 +22,7 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: ${CORS_ORGIN_URL}
+    origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
@@ -49,10 +33,10 @@ backend:
   database:
     client: pg
     connection:
-      host: ${POSTGRES_HOST}
-      port: ${POSTGRES_PORT}
-      user: ${POSTGRES_USER}
-      password: ${POSTGRES_PASSWORD}
+      host: localhost
+      port: 5432
+      user: postgres
+      password: postgres
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -85,6 +69,14 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
+auth:
+  environment: development
+  providers:
+    google:
+      development:
+        clientId: 873314613757-3e3v3u99qq9toedhomjgp2b5ms4lcj68.apps.googleusercontent.com
+        clientSecret: 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
+
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
@@ -97,45 +89,32 @@ catalog:
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
-      target: ../../seed/entities.yaml
-     
-    - type: file
-      target: ../../seed/templates/website/template.yaml
-      rules:
-        - allow: [Template]
+      target: ../../examples/entities.yaml
 
     # Local example template
     - type: file
-      target: ../../seed/templates/service/template.yaml
+      target: ../../examples/template/template.yaml
       rules:
         - allow: [Template]
 
     # Local example organizational data
     - type: file
-      target: ../../seed/org/groups.yaml
+      target: ../../examples/org.yaml
       rules:
         - allow: [User, Group]
     
     - type: file
-      target: ../../seed/org/users.yaml
+      target: ../../users/org.yaml
       rules:
         - allow: [User, Group]
 
+    ## Uncomment these lines to add more example data
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
-#########
-kubernetes:
- serviceLocatorMethod:
-   type: 'multiTenant'
- clusterLocatorMethods:
-   - type: 'config'
-     clusters:
-       - url: ${K8S_ENDPOINT}
-         name: gcp-poc
-         authProvider: 'serviceAccount'
-         skipTLSVerify: false
-         skipMetricsLookup: true
-         serviceAccountToken: ${K8S_SA_TOKEN}
-         caData: ${K8S_CA_DATA}
+    ## Uncomment these lines to add an example org
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+    #   rules:
+    #     - allow: [User, Group]
 
-lighthouse:
-  baseUrl: http://localhost:4008

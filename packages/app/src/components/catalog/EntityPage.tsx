@@ -1,7 +1,5 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
-import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
-import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
 import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,
@@ -33,7 +31,6 @@ import {
 import {
   isGithubActionsAvailable,
   EntityGithubActionsContent,
-  EntityRecentGithubActionsRunsCard,
 } from '@backstage/plugin-github-actions';
 import {
   EntityUserProfileCard,
@@ -60,9 +57,6 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-import { EntityLighthouseContent } from '@backstage/plugin-lighthouse';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -136,14 +130,9 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-    <Grid item md={6}>
-        <EntityGithubPullRequestsOverviewCard />
-      </Grid>
+
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
-    </Grid>
-    <Grid item sm={6}>
-      <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
     </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
@@ -158,12 +147,9 @@ const serviceEntityPage = (
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      <EntityGithubActionsContent />
-      {/* {cicdContent} */}
+      {cicdContent}
     </EntityLayout.Route>
-    <EntityLayout.Route path="/github-actions" title="GitHub Actions">
-      <EntityGithubActionsContent />
-    </EntityLayout.Route>
+
     <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>
@@ -173,10 +159,6 @@ const serviceEntityPage = (
           <EntityConsumedApisCard />
         </Grid>
       </Grid>
-    </EntityLayout.Route>
-  
-    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
-      <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">
@@ -189,9 +171,7 @@ const serviceEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
+
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
@@ -218,12 +198,7 @@ const websiteEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
-    <EntityLayout.Route path="/lighthouse" title="Lighthouse">
-      <EntityLighthouseContent />
-    </EntityLayout.Route>
-    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
-      <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route>
+
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
