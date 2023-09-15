@@ -6,21 +6,18 @@ metadata:
   name: examples
 spec:
   owner: guests
-# ---
-# # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
-# apiVersion: backstage.io/v1alpha1
-# kind: Component
-# metadata:
-#   name: example-website
-#   annotations:
-#     lighthouse.com/website-url: https://www.keyvalue.systems
-# spec:
-#   type: website
-#   lifecycle: production
-#   owner: guests
-#   system: examples
-#   providesApis: [example-grpc-api]
-
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: example-website
+spec:
+  type: website
+  lifecycle: experimental
+  owner: guests
+  system: examples
+  providesApis: [example-grpc-api]
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
@@ -42,28 +39,3 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: auth-service
-  description: backstage.io
-  annotations:
-    github.com/project-slug: 'keycode-01/auth-service'
-spec:
-  type: service
-  lifecycle: development
-  owner: user:neerajjose
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: RoadieHQ-service
-  description: Component with GitHub actions enabled.
-  annotations:
-    github.com/project-slug: 'RoadieHQ/sample-service'
-spec:
-  type: service
-  lifecycle: production
-  owner: user:neerajjose
