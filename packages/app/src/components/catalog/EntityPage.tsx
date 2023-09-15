@@ -3,53 +3,8 @@ import React from 'react';
 import { DashboardViewer } from '@k-phoen/backstage-plugin-grafana';
 
 import { Button, Grid } from '@material-ui/core';
-import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
-import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
-import {
-  EntityApiDefinitionCard,
-  EntityConsumedApisCard,
-  EntityConsumingComponentsCard,
-  EntityHasApisCard,
-  EntityProvidedApisCard,
-  EntityProvidingComponentsCard,
-} from '@backstage/plugin-api-docs';
-import {
-  EntityAboutCard,
-  EntityDependsOnComponentsCard,
-  EntityDependsOnResourcesCard,
-  EntityHasComponentsCard,
-  EntityHasResourcesCard,
-  EntityHasSubcomponentsCard,
-  EntityHasSystemsCard,
-  EntityLayout,
-  EntityLinksCard,
-  EntitySwitch,
-  EntityOrphanWarning,
-  EntityProcessingErrorsPanel,
-  isComponentType,
-  isKind,
-  hasCatalogProcessingErrors,
-  isOrphan,
-  hasRelationWarnings,
-  EntityRelationWarning,
-} from '@backstage/plugin-catalog';
-import {
-  isGithubActionsAvailable,
-  EntityGithubActionsContent,
-  EntityRecentGithubActionsRunsCard,
-} from '@backstage/plugin-github-actions';
-import {
-  EntityUserProfileCard,
-  EntityGroupProfileCard,
-  EntityMembersListCard,
-  EntityOwnershipCard,
-} from '@backstage/plugin-org';
-import { EntityTechdocsContent } from '@backstage/plugin-techdocs';
-import { EmptyState } from '@backstage/core-components';
-import {
-  Direction,
-  EntityCatalogGraphCard,
-} from '@backstage/plugin-catalog-graph';
+
+
 import {
   RELATION_API_CONSUMED_BY,
   RELATION_API_PROVIDED_BY,
@@ -61,11 +16,22 @@ import {
   RELATION_PROVIDES_API,
 } from '@backstage/catalog-model';
 
-import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
-import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-import { EntityLighthouseContent } from '@backstage/plugin-lighthouse';
+import { EmptyState } from '../../Bstage-componets';
+import { EntityAboutCard, EntityDependsOnComponentsCard, EntityDependsOnResourcesCard, EntityHasComponentsCard, EntityHasResourcesCard, EntityHasSubcomponentsCard, EntityHasSystemsCard, EntityLayout, EntityLinksCard, EntityOrphanWarning, EntityProcessingErrorsPanel, EntityRelationWarning, EntitySwitch, hasCatalogProcessingErrors, hasRelationWarnings, isComponentType, isKind, isOrphan } from '../../Bstage-componets/plugins/catalog/src';
+import { EntityLighthouseContent } from '../../Bstage-componets/plugins/lighthouse/src';
+import { Direction, EntityCatalogGraphCard } from '../../Bstage-componets/plugins/catalog-graph/src';
+import { EntityGithubActionsContent, EntityRecentGithubActionsRunsCard, isGithubActionsAvailable } from '../../Bstage-componets/plugins/github-actions/src';
+import { EntityApiDefinitionCard, EntityConsumedApisCard, EntityConsumingComponentsCard, EntityHasApisCard, EntityProvidedApisCard, EntityProvidingComponentsCard } from '../../Bstage-componets/plugins/api-docs/src';
+import { EntityKubernetesContent } from '../../Bstage-componets/plugins/kubernetes/src';
+import { TechDocsAddons } from '../../Bstage-componets/plugins/techdocs-react/src';
+import { EntityTechdocsContent } from '../../Bstage-componets/plugins/techdocs/src';
+import { EntityOwnershipCard,  
+  EntityUserProfileCard,
+  EntityGroupProfileCard,
+  EntityMembersListCard, } from '../../Bstage-componets/plugins/org/src';
+import { EntityGithubPullRequestsContent, EntityGithubPullRequestsOverviewCard } from '../../Bstage-componets/plugins/backstage-plugin-github-pull-requests/src';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -139,28 +105,27 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-    <Grid item md={6}>
-      <EntityGithubPullRequestsOverviewCard />
-    </Grid>
-    <Grid item md={4} xs={12}>
+    {/* <Grid item md={6} xs={12}>
+      <EntityHasSubcomponentsCard variant="gridItem" />
+    </Grid> */}
+    <Grid item md={6} xs={12}>
       <EntityLinksCard />
     </Grid>
-    <Grid item sm={6}>
+    <Grid item md={6}>
+        <EntityGithubPullRequestsOverviewCard />
+      </Grid>
+      <Grid item sm={6}>
       <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
-    </Grid>
-    <Grid item md={8} xs={12}>
-      <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
   </Grid>
 );
 
 const monitoringContent = (
   <Grid container spacing={3} alignItems="stretch">
-
-    <Grid item md={6}>
+    <Grid style={{minHeight: '350px'}} item md={12}>
       <DashboardViewer embedUrl='http://localhost:3002/d-solo/n8niX6kIk/service-metrics?orgId=1&from=now&to=now-3h&panelId=6'/>
     </Grid>
-    <Grid item md={6}>
+    <Grid style={{minHeight: '350px'}} item md={12}>
       <DashboardViewer embedUrl='http://localhost:3002/d-solo/n8niX6kIk/service-metrics?orgId=1&from=now&to=now-3h&panelId=4'/>
     </Grid>
   </Grid>
@@ -179,15 +144,12 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/monitoring" title="Monitoring">
       {monitoringContent}
     </EntityLayout.Route>
-    <EntityLayout.Route path="/github-actions" title="GitHub Actions">
-      <EntityGithubActionsContent />
-    </EntityLayout.Route>
     <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityProvidedApisCard />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityConsumedApisCard />
         </Grid>
       </Grid>
@@ -199,10 +161,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">
       <Grid container spacing={3} alignItems="stretch">
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityDependsOnComponentsCard variant="gridItem" />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityDependsOnResourcesCard variant="gridItem" />
         </Grid>
       </Grid>
@@ -319,15 +281,15 @@ const apiPage = (
 const userPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
         {entityWarningContent}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6}> */}
           <EntityUserProfileCard variant="gridItem" />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        {/* </Grid> */}
+        {/* <Grid item xs={12} md={6}> */}
           <EntityOwnershipCard variant="gridItem" />
-        </Grid>
-      </Grid>
+        {/* </Grid>
+      </Grid> */}
     </EntityLayout.Route>
   </EntityLayout>
 );
@@ -341,7 +303,7 @@ const groupPage = (
           <EntityGroupProfileCard variant="gridItem" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <EntityOwnershipCard variant="gridItem" />
+          {/* <EntityOwnershipCard variant="gridItem" /> */}
         </Grid>
         <Grid item xs={12}>
           <EntityMembersListCard />

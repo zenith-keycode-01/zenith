@@ -1,12 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, Grid, Paper } from '@material-ui/core';
 
-import { CatalogSearchResultListItem } from '@backstage/plugin-catalog';
 import {
   catalogApiRef,
   CATALOG_FILTER_EXISTS,
 } from '@backstage/plugin-catalog-react';
-import { TechDocsSearchResultListItem } from '@backstage/plugin-techdocs';
 
 import { SearchType } from '@backstage/plugin-search';
 import {
@@ -24,6 +22,8 @@ import {
   Page,
 } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
+import { CatalogSearchResultListItem } from '../../Bstage-componets/plugins/catalog/src';
+import { TechDocsSearchResultListItem } from '@backstage/plugin-techdocs';
 
 const useStyles = makeStyles((theme: Theme) => ({
   bar: {

@@ -104,3 +104,17 @@ metadata:
 spec:
   memberOf: [owner]
 ---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: abhay
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: teresa
+spec:
+  memberOf: [users]
+---

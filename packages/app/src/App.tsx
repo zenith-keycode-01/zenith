@@ -1,41 +1,33 @@
 import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
-import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
-import {
-  CatalogEntityPage,
-  CatalogIndexPage,
-  catalogPlugin,
-} from '@backstage/plugin-catalog';
-import {
-  CatalogImportPage,
-  catalogImportPlugin,
-} from '@backstage/plugin-catalog-import';
-import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
-import { orgPlugin } from '@backstage/plugin-org';
+
 import { SearchPage } from '@backstage/plugin-search';
-import { TechRadarPage } from '@backstage/plugin-tech-radar';
-import {
-  TechDocsIndexPage,
-  techdocsPlugin,
-  TechDocsReaderPage,
-} from '@backstage/plugin-techdocs';
-import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
+
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-import { UserSettingsPage } from '@backstage/plugin-user-settings';
 import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
 import { Root } from './components/Root';
 
-import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
-import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
-import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { githubAuthApiRef, googleAuthApiRef } from '@backstage/core-plugin-api';
-import { SignInPage } from '@backstage/core-components';
-import { LighthousePage } from '@backstage/plugin-lighthouse';
+import { googleAuthApiRef } from '@backstage/core-plugin-api';
+import { SignInPage, OAuthRequestDialog, AlertDisplay } from './Bstage-componets';
+import { CatalogEntityPage, CatalogIndexPage, catalogPlugin } from './Bstage-componets/plugins/catalog/src';
+import { ScaffolderPage, scaffolderPlugin } from './Bstage-componets/plugins/scaffolder/src';
+import { RequirePermission } from './Bstage-componets/plugins/permission-react/src';
+import { CatalogImportPage, catalogImportPlugin } from './Bstage-componets/plugins/catalog-import/src';
+
+import { LighthousePage } from './Bstage-componets/plugins/lighthouse/src';
+import { CatalogGraphPage } from './Bstage-componets/plugins/catalog-graph/src';
+import { apiDocsPlugin, ApiExplorerPage } from './Bstage-componets/plugins/api-docs/src';
+import { TechDocsIndexPage, techdocsPlugin, TechDocsReaderPage } from './Bstage-componets/plugins/techdocs/src';
+import { TechDocsAddons } from './Bstage-componets/plugins/techdocs-react/src';
+import { TechRadarPage } from './Bstage-componets/plugins/tech-radar/src';
+import { UserSettingsPage } from './Bstage-componets/plugins/user-settings/src';
+import { orgPlugin } from './Bstage-componets/plugins/org/src';
+import { colors } from './themeUtils';
 
 const app = createApp({
   components: {
@@ -43,19 +35,20 @@ const app = createApp({
       <SignInPage
         {...props}
         auto
-        providers={[{
-          id: 'google',
-          title: 'Google',
-          message: 'Sign in using google',
-          apiRef: googleAuthApiRef,
-        // },
-        // {
-        //   id: 'github',
-        //   title: 'Github',
-        //   message: 'Sign in using github',
-        //   apiRef: githubAuthApiRef,
-        }
-      ]}
+        providers={[
+          {
+            id: 'google',
+            title: 'Google',
+            message: 'Sign in using google',
+            apiRef: googleAuthApiRef,
+            // },
+            // {
+            //   id: 'github',
+            //   title: 'Github',
+            //   message: 'Sign in using github',
+            //   apiRef: githubAuthApiRef,
+          },
+        ]}
       />
     ),
   },
@@ -105,7 +98,7 @@ const routes = (
     <Route path="/api-docs" element={<ApiExplorerPage />} />
     <Route
       path="/tech-radar"
-      element={<TechRadarPage width={1500} height={800} />}
+      element={<TechRadarPage width={1240} height={660} />}
     />
     <Route
       path="/catalog-import"
@@ -124,11 +117,11 @@ const routes = (
 );
 
 export default app.createRoot(
-  <>
+  <div style={{backgroundColor: colors.BACKGROUND_COLOR, width: '100%', height:'100vh'}}>
     <AlertDisplay />
     <OAuthRequestDialog />
     <AppRouter>
       <Root>{routes}</Root>
     </AppRouter>
-  </>,
+  </div>
 );

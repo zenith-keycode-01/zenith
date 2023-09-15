@@ -31,7 +31,7 @@ services:
       PGUSER: postgres
       PGPASSWORD: superman
       LAS_PORT: 4008
-      # LAS_CORS: true
+      LAS_CORS: 'true'
     ports:
       - "4008:4008"
       
