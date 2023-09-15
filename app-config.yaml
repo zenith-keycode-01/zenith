@@ -123,3 +123,11 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
+kubernetes:
+  serviceLocatorMethod:
+    type: 'multiTenant'
+  clusterLocatorMethods:
+  - type: 'gke'
+    projectId: 'gcp-poc-321808'
+    skipTLSVerify: true
+    skipMetricsLookup: true
