@@ -1,0 +1,106 @@
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+spec:
+  memberOf: [guests]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: mohammedshameemshah
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: shameem.s
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: neerajjose
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: ujjwalsnair 
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: aswindevs07
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: abhishekpradeep124
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: harikrishna.t.ravi
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: teresajerard98
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: abhaybalan200
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: snehajoy789
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: georgeeldho009
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: rajjithesh55
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: keyzersoze789
+spec:
+  memberOf: [users]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: govindskumar22
+spec:
+  memberOf: [users]
+---
