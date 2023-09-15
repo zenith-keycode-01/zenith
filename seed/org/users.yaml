@@ -90,3 +90,10 @@ metadata:
 spec:
   memberOf: [users]
 ---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: govindskumar22
+spec:
+  memberOf: [users]
+---
