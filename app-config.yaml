@@ -131,5 +131,5 @@ kubernetes:
     projectId: ${GCP_PROJECT_ID}
     region: ${GKE_CLUSTER_REGION}
     skipTLSVerify: true
-    skipMetricsLookup: true
+    skipMetricsLookup: false
     exposeDashboard: true
