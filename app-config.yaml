@@ -5,6 +5,15 @@ app:
 organization:
   name: Keycode
 
+auth:
+  # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: development
+  providers:
+    google:
+      development:
+        clientId: ${AUTH_GOOGLE_CLIENT_ID}
+        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
+
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
@@ -69,13 +78,6 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
-auth:
-  environment: development
-  providers:
-    google:
-      development:
-        clientId: ${AUTH_GOOGLE_CLIENT_ID}
-        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
