@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.name | dump }}
+  annotations:
+    github.com/project-slug: ${{ values.repoUrl | replace("github.com?owner=", "") | replace("&repo=","/") | dump }}
+    backstage.io/kubernetes-label-selector: app=${{ values.name }}
+    lighthouse.com/website-url: ${{ values.WebUrl }}
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: website
+  owner: user:guest
+  lifecycle: experimental

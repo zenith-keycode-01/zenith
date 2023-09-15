@@ -1,0 +1,54 @@
+name: Build and Deploy To Development
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+env:
+  APP_NAME: dashboard
+
+jobs:
+
+  deploy-to-k8s:
+    name: Deploy to K8s
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      id-token: write
+      contents: read
+    env:
+
+      GCP_WORKLOAD_IDENTITY_PROVIDER: projects/873314613757/locations/global/workloadIdentityPools/backstage/providers/backstage
+      GCP_WORKLOAD_IDENTITY_SA: backstage-poc@gcp-poc-321808.iam.gserviceaccount.com 
+      GKE_ZONE: us-central1-b
+      K8S_CLUSTER: gcp-poc-cluster
+{% raw %}
+    steps:
+      - name: "Checkout repository on : ${{ github.REF }}"
+        uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ env.GCP_WORKLOAD_IDENTITY_SA }}'
+
+      - uses: azure/setup-kubectl@v3
+        with:
+          version: "v1.22.0" # default is latest stable
+        id: install
+
+      - name: GKE config
+        id: "get-credentials"
+        uses: "google-github-actions/get-gke-credentials@v0"
+        with:
+          cluster_name: "${{ env.K8S_CLUSTER }}"
+          location: "${{ env.GKE_ZONE }}"
+{% endraw %}
+      - name: Deploy
+        run: |
+          kubectl apply -f k8s/deploy.yaml
+  
