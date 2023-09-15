@@ -1,0 +1,175 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: products-api
+  description: Retrieve products details
+spec:
+  type: openapi
+  lifecycle: production
+  owner: lead
+  system: Customer
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: Product Details API
+      license:
+        name: MIT
+    servers:
+      - url:  https://fakestoreapi.com/
+    paths:
+      /products:
+        get:
+          summary: Get a list of all products
+          responses:
+            '200':
+              description: Successful response
+        post:
+          summary: Create a new product
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    price:
+                      type: number
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    category:
+                      type: string
+          responses:
+            '200':
+              description: Product created successfully
+              content:
+                application/json:
+                  example:
+                    id: 123
+                    title: test product
+                    price: 13.5
+                    description: lorem ipsum set
+                    image: https://i.pravatar.cc
+                    category: electronic
+      /products/categories:
+        get:
+          summary: Get a list of product categories
+          responses:
+            '200':
+              description: Successful response
+      /products/1:
+        get:
+          summary: Get details of a product by its id
+          responses:
+            '200':
+              description: Successful response
+    ...
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: products-service
+  description: Products service
+  annotations:
+    github.com/project-slug: "keycode-01/products-service"
+    backstage.io/source-location: "url:https://github.com/keycode-01/products-service"
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: production
+  owner: lead
+  providesApis: 
+    - "products-api"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: carts-api
+  description: Retrieve cart details
+spec:
+  type: openapi
+  lifecycle: production
+  owner: lead
+  system: Customer
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: Cart Details API
+      license:
+        name: MIT
+    servers:
+      - url:  https://fakestoreapi.com/
+    paths:
+      /carts:
+        get:
+          summary: Get a list of all products in cart
+          responses:
+            '200':
+              description: Successful response
+        post:
+          summary: Create a new shopping cart
+          requestBody:
+            content:
+              application/json: 
+                schema:
+                  type: object
+                  properties:
+                    userId:
+                      type: integer
+                    date:
+                      type: string
+                      format: date
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          productId:
+                            type: integer
+                          quantity:
+                            type: integer
+          responses:
+            '200':
+              description: Shopping cart created successfully
+              content:
+                application/json:
+                  example:
+                    id: 123
+                    userId: 5
+                    date: "2020-02-03"
+                    products:
+                      - productId: 5
+                        quantity: 1
+                      - productId: 1
+                        quantity: 5
+      /carts/2:
+        get:
+          summary: Get details of a single chart
+          responses:
+            '200':
+              description: Successful response
+    ...
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: carts-service
+  description: Carts service
+  annotations:
+    backstage.io/source-location: "url:https://github.com/keycode-01/carts-service"
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: "keycode-01/carts-service"
+spec:
+  type: service
+  lifecycle: production
+  owner: lead
+  providesApis: 
+    - "carts-api"
+  consumesApis:
+    - "products-api"

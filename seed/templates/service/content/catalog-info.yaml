@@ -14,12 +14,3 @@ spec:
   dependsOn: 
   - ${{ values.dependency | dump }}
   - ${{ values.db }}
-
-# ---
-# apiVersion: backstage.io/v1alpha1
-# kind: Resource
-# metadata:
-#   name: ${{ values.db | dump }}
-# spec:
-#   type: database
-#   owner: ${{ values.owner | dump }}
