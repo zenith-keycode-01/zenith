@@ -15,12 +15,35 @@ spec:
     - title: Fill in some steps
       required:
         - name
+        - owner
       properties:
         name:
           title: Name
           type: string
           description: Unique name of the component
           ui:autofocus: true
+          ui:options:
+            rows: 5
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+        dependency:
+          title: Dependency
+          type: string
+          description: Dependent components
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Component
+        db:
+          title: Database
+          type: string
+          description: Database
           ui:options:
             rows: 5
     - title: Choose a location
@@ -47,6 +70,10 @@ spec:
         values:
           name: ${{ parameters.name }}
           repoUrl: ${{ parameters.repoUrl }}
+          owner: ${{ parameters.owner }}
+          dependency: ${{ parameters.dependency }}
+          db: ${{ parameters.db }}
+          
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish

@@ -8,5 +8,17 @@ metadata:
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
-  owner: user:guest
+  owner: ${{ values.owner | dump }}
   lifecycle: experimental
+  dependsOn: 
+  - ${{ values.dependency | dump }}
+  - "resource:default/${{ values.db }}"
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: ${{ values.db | dump }}
+spec:
+  type: database
+  owner: ${{ values.owner | dump }}
