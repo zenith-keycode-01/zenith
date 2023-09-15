@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ${{ values.name }}
+  name: ${{ values.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${{ values.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ${{ values.name }}
+    spec:
+      containers:
+      - image: nginx
+        name: ${{ values.name }}
+        resources: 
+          limits:
+            memory: 128Mi
+          requests:
+            memory: 128Mi
+            cpu: 100m
