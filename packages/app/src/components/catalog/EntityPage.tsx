@@ -391,21 +391,8 @@ const domainPage = (
         <Grid item md={6} xs={12}>
           <EntityCatalogGraphCard variant="gridItem" height={400} />
         </Grid>
-      </Grid>
-    </EntityLayout.Route>
-  </EntityLayout>
-);
-
-const resourcePage = (
-  <EntityLayout>
-    <EntityLayout.Route path="/" title="Overview">
-      <Grid container spacing={3} alignItems="stretch">
-        {entityWarningContent}
         <Grid item md={6}>
-          <EntityAboutCard variant="gridItem" />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <EntityCatalogGraphCard variant="gridItem" height={400} />
+          <EntityHasSystemsCard variant="gridItem" />
         </Grid>
       </Grid>
     </EntityLayout.Route>
@@ -420,7 +407,7 @@ export const entityPage = (
     <EntitySwitch.Case if={isKind('user')} children={userPage} />
     <EntitySwitch.Case if={isKind('system')} children={systemPage} />
     <EntitySwitch.Case if={isKind('domain')} children={domainPage} />
-    <EntitySwitch.Case if={isKind('resource')} children={resourcePage} />
+
     <EntitySwitch.Case>{defaultEntityPage}</EntitySwitch.Case>
   </EntitySwitch>
 );

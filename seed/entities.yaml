@@ -67,4 +67,3 @@ spec:
   type: service
   lifecycle: production
   owner: user:neerajjose
-
