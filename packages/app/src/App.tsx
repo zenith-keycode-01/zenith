@@ -35,7 +35,7 @@ import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { githubAuthApiRef, googleAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
-
+import { LighthousePage } from '@backstage/plugin-lighthouse';
 
 const app = createApp({
   components: {
@@ -81,8 +81,10 @@ const app = createApp({
 
 
 const routes = (
+  
   <FlatRoutes>
     <Route path="/" element={<Navigate to="catalog" />} />
+    <Route path="/lighthouse" element={<LighthousePage />} />
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
