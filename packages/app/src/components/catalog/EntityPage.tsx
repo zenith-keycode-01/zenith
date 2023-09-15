@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { DashboardViewer } from '@k-phoen/backstage-plugin-grafana';
+
 import { Button, Grid } from '@material-ui/core';
 import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
 import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
@@ -137,8 +140,8 @@ const overviewContent = (
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
     <Grid item md={6}>
-        <EntityGithubPullRequestsOverviewCard />
-      </Grid>
+      <EntityGithubPullRequestsOverviewCard />
+    </Grid>
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
@@ -147,6 +150,18 @@ const overviewContent = (
     </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
+    </Grid>
+  </Grid>
+);
+
+const monitoringContent = (
+  <Grid container spacing={3} alignItems="stretch">
+
+    <Grid item md={6}>
+      <DashboardViewer embedUrl='http://localhost:3002/d-solo/n8niX6kIk/service-metrics?orgId=1&from=now&to=now-3h&panelId=6'/>
+    </Grid>
+    <Grid item md={6}>
+      <DashboardViewer embedUrl='http://localhost:3002/d-solo/n8niX6kIk/service-metrics?orgId=1&from=now&to=now-3h&panelId=4'/>
     </Grid>
   </Grid>
 );
@@ -161,6 +176,9 @@ const serviceEntityPage = (
       <EntityGithubActionsContent />
       {/* {cicdContent} */}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/monitoring" title="Monitoring">
+      {monitoringContent}
+    </EntityLayout.Route>
     <EntityLayout.Route path="/github-actions" title="GitHub Actions">
       <EntityGithubActionsContent />
     </EntityLayout.Route>
@@ -174,7 +192,7 @@ const serviceEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
-  
+
     <EntityLayout.Route path="/pull-requests" title="Pull Requests">
       <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
@@ -206,6 +224,9 @@ const websiteEntityPage = (
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/monitoring" title="Monitoring">
+      {monitoringContent}
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">

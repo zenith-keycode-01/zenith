@@ -31,10 +31,22 @@ services:
       PGUSER: postgres
       PGPASSWORD: superman
       LAS_PORT: 4008
-      LAS_CORS: true
+      # LAS_CORS: true
     ports:
       - "4008:4008"
       
+  grafana:
+    image: grafana/grafana:8.3.3
+    environment:
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: password
+      GF_DATASOURCES_ALLOW_UPDATE: "true"
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
 volumes:
   db:
     driver: local
