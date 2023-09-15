@@ -6,6 +6,20 @@ metadata:
   name: examples
 spec:
   owner: guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: Merchants
+spec:
+  owner: dev
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: Customer
+spec:
+  owner: lead
 # ---
 # # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
 # apiVersion: backstage.io/v1alpha1
@@ -26,12 +40,12 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: example-grpc-api
+  name: merchants-API
 spec:
   type: grpc
-  lifecycle: experimental
-  owner: guests
-  system: examples
+  lifecycle: staging
+  owner: harikrishna.t.ravi
+  system: Merchants
   definition: |
     syntax = "proto3";
 
@@ -46,24 +60,31 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: auth-service
-  description: backstage.io
+  name: coupon-service
+  description: A coupon service offers savings through vouchers
   annotations:
-    github.com/project-slug: 'keycode-01/auth-service'
-spec:
-  type: service
-  lifecycle: development
-  owner: user:neerajjose
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: RoadieHQ-service
-  description: Component with GitHub actions enabled.
-  annotations:
-    github.com/project-slug: 'RoadieHQ/sample-service'
+    github.com/project-slug: 'keycode-01/coupon-service'
 spec:
   type: service
   lifecycle: production
-  owner: user:neerajjose
+  owner: lead
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: coupon-DB
+  description: DB for coupon
+spec:
+  type: database
+  lifecycle: production
+  owner: dev
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: logistics-DB
+  description: DB for logistics
+spec:
+  type: database
+  lifecycle: production
+  owner: lead

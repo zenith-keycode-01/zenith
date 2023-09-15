@@ -2,7 +2,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: users
+  name: dev
 spec:
   type: team
   children: []
@@ -12,6 +12,22 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: guests
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: lead
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: owner
 spec:
   type: team
   children: []
