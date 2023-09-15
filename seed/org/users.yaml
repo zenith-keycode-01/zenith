@@ -16,13 +16,6 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: shameem.s
-spec:
-  memberOf: [users]
----
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
   name: neerajjose
 spec:
   memberOf: [users]
@@ -94,13 +87,6 @@ apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
   name: keyzersoze789
-spec:
-  memberOf: [users]
----
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: govindskumar22
 spec:
   memberOf: [users]
 ---
