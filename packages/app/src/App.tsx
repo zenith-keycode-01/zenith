@@ -33,7 +33,7 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { googleAuthApiRef } from '@backstage/core-plugin-api';
+import { githubAuthApiRef, googleAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
 
 
@@ -48,7 +48,14 @@ const app = createApp({
           title: 'Google',
           message: 'Sign in using google',
           apiRef: googleAuthApiRef,
-        }]}
+        // },
+        // {
+        //   id: 'github',
+        //   title: 'Github',
+        //   message: 'Sign in using github',
+        //   apiRef: githubAuthApiRef,
+        }
+      ]}
       />
     ),
   },

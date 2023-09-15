@@ -31,6 +31,7 @@ import {
 import {
   isGithubActionsAvailable,
   EntityGithubActionsContent,
+  EntityRecentGithubActionsRunsCard,
 } from '@backstage/plugin-github-actions';
 import {
   EntityUserProfileCard,
@@ -134,6 +135,9 @@ const overviewContent = (
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
+    <Grid item sm={6}>
+      <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
+    </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
@@ -147,9 +151,12 @@ const serviceEntityPage = (
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
+      <EntityGithubActionsContent />
+      {/* {cicdContent} */}
     </EntityLayout.Route>
-
+    <EntityLayout.Route path="/github-actions" title="GitHub Actions">
+      <EntityGithubActionsContent />
+    </EntityLayout.Route>
     <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item md={6}>

@@ -43,11 +43,24 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: test
+  name: auth-service
   description: backstage.io
   annotations:
-    github.com/project-slug: 'keycode-01/test'
+    github.com/project-slug: 'keycode-01/auth-service'
 spec:
-  type: website
+  type: service
+  lifecycle: development
+  owner: user:neerajjose
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: RoadieHQ-service
+  description: Component with GitHub actions enabled.
+  annotations:
+    github.com/project-slug: 'RoadieHQ/sample-service'
+spec:
+  type: service
   lifecycle: production
-  owner: user:guest
+  owner: user:neerajjose
