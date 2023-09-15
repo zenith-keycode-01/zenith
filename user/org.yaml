@@ -1,0 +1,24 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: users
+spec:
+  type: team
+  children: []
+ 
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: mohammedshameemshah
+spec:
+  memberOf: [users]
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: shameem.s@keyvalue.systems
+spec:
+  memberOf: [users]
