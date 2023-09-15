@@ -104,7 +104,10 @@ catalog:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
       target: ../../seed/entities.yaml
-     
+
+    - type: file
+      target: ../../seed/demo.yaml
+
     - type: file
       target: ../../seed/templates/website/template.yaml
       rules:
