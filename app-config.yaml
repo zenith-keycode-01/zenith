@@ -128,6 +128,8 @@ kubernetes:
     type: 'multiTenant'
   clusterLocatorMethods:
   - type: 'gke'
-    projectId: 'gcp-poc-321808'
+    projectId: ${GCP_PROJECT_ID}
+    region: ${GKE_CLUSTER_REGION}
     skipTLSVerify: true
     skipMetricsLookup: true
+    exposeDashboard: true
