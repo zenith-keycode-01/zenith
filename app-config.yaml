@@ -123,13 +123,17 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
+#########
 kubernetes:
-  serviceLocatorMethod:
-    type: 'multiTenant'
-  clusterLocatorMethods:
-  - type: 'gke'
-    projectId: ${GCP_PROJECT_ID}
-    region: ${GKE_CLUSTER_REGION}
-    skipTLSVerify: true
-    skipMetricsLookup: false
-    exposeDashboard: true
+ serviceLocatorMethod:
+   type: 'multiTenant'
+ clusterLocatorMethods:
+   - type: 'config'
+     clusters:
+       - url: ${K8S_ENDPOINT}
+         name: gcp-poc
+         authProvider: 'serviceAccount'
+         skipTLSVerify: false
+         skipMetricsLookup: true
+         serviceAccountToken: ${K8S_SA_TOKEN}
+         caData: ${K8S_CA_DATA}
