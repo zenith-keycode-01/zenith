@@ -147,7 +147,7 @@ kubernetes:
          name: gcp-poc
          authProvider: 'serviceAccount'
          skipTLSVerify: false
-         skipMetricsLookup: true
+         skipMetricsLookup: false
          serviceAccountToken: ${K8S_SA_TOKEN}
          caData: ${K8S_CA_DATA}
 
