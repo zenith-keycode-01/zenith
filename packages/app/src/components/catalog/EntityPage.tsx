@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
+import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
+import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
 import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,
@@ -131,7 +133,9 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
+    <Grid item md={6}>
+        <EntityGithubPullRequestsOverviewCard />
+      </Grid>
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
@@ -167,6 +171,10 @@ const serviceEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
+  
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">
       <Grid container spacing={3} alignItems="stretch">
@@ -178,6 +186,7 @@ const serviceEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
+    
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
